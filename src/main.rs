@@ -1,5 +1,7 @@
 use std::env;
 
+use ripgrep_lite::search;
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     let num_args = args.len();
@@ -13,4 +15,13 @@ fn main() {
 
     let pattern = &args[1];
     let path = &args[2];
+
+    // read file
+    let file = std::fs::read_to_string(path).unwrap();
+
+    let lines = search(pattern, &file);
+
+    for (line_no, line) in lines {
+        println!("{}: {}", line_no, line);
+    }
 }
