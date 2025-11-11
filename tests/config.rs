@@ -16,3 +16,10 @@ fn errors_when_path_missing() {
     let err = ripgrep_lite::Config::from_args(args).unwrap_err();
     assert_eq!(err, ripgrep_lite::ConfigError::MissingPath);
 }
+
+#[test]
+fn errors_when_pattern_missing() {
+    let args = ["rglt"];
+    let err = ripgrep_lite::Config::from_args(args).unwrap_err();
+    assert_eq!(err, ripgrep_lite::ConfigError::MissingPattern);
+}
